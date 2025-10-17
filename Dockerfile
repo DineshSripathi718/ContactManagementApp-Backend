@@ -1,14 +1,29 @@
-# Use official Java runtime
-FROM openjdk:17-jdk-slim
+# Use official Maven + Java to build
+FROM maven:3.9.5-eclipse-temurin-17 AS build
 
 # Set working directory
 WORKDIR /app
 
-# Copy the JAR file into container
-COPY target/ContactManagementSystemAppBE-0.0.1-SNAPSHOT.jar app.jar
+# Copy pom.xml and download dependencies first (cache optimization)
+COPY pom.xml .
+RUN mvn dependency:go-offline
 
-# Expose default Spring Boot port
+# Copy source code
+COPY src ./src
+
+# Build the JAR (skip tests for deployment)
+RUN mvn clean package -DskipTests
+
+# Second stage: use slim Java runtime
+FROM openjdk:17-jdk-slim
+
+WORKDIR /app
+
+# Copy the built JAR from the first stage
+COPY --from=build /app/target/ContactManagementSystemAppBE-0.0.1-SNAPSHOT.jar app.jar
+
+# Expose port
 EXPOSE 8080
 
-# Start the Spring Boot app
+# Start the app
 ENTRYPOINT ["java","-jar","app.jar"]
