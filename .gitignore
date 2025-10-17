@@ -31,3 +31,30 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# ===============================
+# Environment / Secrets
+# ===============================
+*.env
+application-local.properties
+application-dev.properties
+application-prod.properties
+# If you accidentally have credentials in application.properties, exclude it
+# OR keep a safe version without passwords
+
+# ===============================
+# OS Files
+# ===============================
+.DS_Store
+Thumbs.db
+
+# ===============================
+# Eclipse / IntelliJ / VS Code
+# ===============================
+*.iml
+.idea/
+*.ipr
+*.iws
+.vscode/
+.project
+.settings/
