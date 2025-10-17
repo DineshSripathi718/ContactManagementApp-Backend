@@ -11,7 +11,7 @@ import com.cms.entities.Contacts;
 import com.cms.serviceLayer.ContactsService;
 
 @RestController
-@CrossOrigin(origins = "http://127.0.0.1:3000")
+@CrossOrigin(origins = "https://bdcontactmanagementapp.netlify.app/")
 public class homeController {
 	
 	@Autowired

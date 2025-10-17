@@ -26,4 +26,9 @@ public class ContactsService {
 		return contactDAO.getReferenceById(id);
 	}
 
+	public String updateContact(Contacts contact) {
+		contactDAO.save(contact);
+		return "updated";
+	}
+
 }
