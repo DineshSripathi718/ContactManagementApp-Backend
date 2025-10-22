@@ -31,4 +31,11 @@ public class ContactsService {
 		return "updated";
 	}
 
+	public String deleteContact(int id) {
+		// TODO Auto-generated method stub
+		Contacts contact = contactDAO.getReferenceById(id);
+		contactDAO.delete(contact);
+		return "Deleted";
+	}
+
 }
